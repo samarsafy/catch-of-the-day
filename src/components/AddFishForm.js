@@ -49,4 +49,3 @@ class AddFishForm extends React.Component {
 }
 
 export default AddFishForm;
-// I need to see the video 13 again to write also the code
