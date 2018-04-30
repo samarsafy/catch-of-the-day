@@ -3,7 +3,7 @@ import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
 import sampleFishes from "../sample-fishes";
-import Fish from "./Fish";
+
 
 class App extends React.Component {
   state = {
@@ -28,7 +28,7 @@ return (
       <Header tagline="Fresh Seafood Market" />
       <ul className="fishes">
       {Object.keys(this.state.fishes).map(key => (
-        <Fish key={key} details= 
+        <fish key={key} details= 
         {this.state.fishes[key]} />
       ))}
       </ul>
