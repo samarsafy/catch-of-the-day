@@ -11,11 +11,11 @@ class AddFishForm extends React.Component {
     //1. stop the form from submitting
     event.preventDefault();
     const fish = {
-      name: this.nameRef.value.value,
-      price: parseFloat(this.priceRef.value.value), 
-      status: this.statusRef.value.value,
-      desc: this.descRef.value.value,
-      image: this.imageRef.value.value
+      name: this.nameRef.value,
+      price: parseFloat(this.priceRef.value), 
+      status: this.statusRef.value,
+      desc: this.descRef.value,
+      image: this.imageRef.value
     };
     this.props.addFish(fish);
     //refresch the form 
