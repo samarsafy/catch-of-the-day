@@ -1,22 +1,24 @@
 import React from "react";
 import { formatPrice } from "../helpers";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Transition from "react-transition-group/Transition";
 
 class Order extends React.Component {
   renderOrder = key => {
     const fish = this.props.fishes[key];
     const count = this.props.order[key];
     const isAvailable = fish && fish.status === "available";
+    const TransitionOptions = {
+      classNames: "order",
+      key,
+      timemout: { enter: 500, exit: 500 }
+    };
     // Make sure the fish is loaded before we continue!
     if (!fish) return null;
 
     if (!isAvailable) {
       return (
-        <CSSTransition
-          classNames="order"
-          key={key}
-          timeout={{ enter: 250, exit: 250 }}
-        >
+        <CSSTransition {...TransitionOptions}>
           <li key={key}>
             Sorry {fish ? fish.name : "fish"} is no longer available
           </li>
@@ -24,17 +26,24 @@ class Order extends React.Component {
       );
     }
     return (
-      <CSSTransition
-        classNames="order"
-        key={key}
-        timeout={{ enter: 250, exit: 250 }}
-      >
+      <CSSTransition {...TransitionOptions}>
         <li key={key}>
-          {count} lbs {fish.name}
-          {formatPrice(count * fish.price)}
-          <button onClick={() => this.props.removeFromOrder(key)}>
-            &times;
-          </button>
+          <span>
+            <TransitionGroup component="span" className="count">
+              <CSSTransition
+                classNames="count"
+                key={count}
+                timemout={{ enter: 500, exit: 500 }}
+              >
+                <span>{count}</span>
+              </CSSTransition>
+            </TransitionGroup>
+            lbs {fish.name}
+            {formatPrice(count * fish.price)}
+            <button onClick={() => this.props.removeFromOrder(key)}>
+              &times;
+            </button>
+          </span>
         </li>
       </CSSTransition>
     );
